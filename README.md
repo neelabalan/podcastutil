@@ -24,7 +24,7 @@ sys     0m0.053s
 ```
 
 
-> you can refer to [`dump.json`]() to get the structure of how it is constructed
+> you can refer to [`dump.json`](https://github.com/neelabalan/podcastutil/blob/master/dump.json) to get the structure of how it is constructed
 
 There are other functions like `get_feeds` and `extract_url_from_opml` you can view them in the `podcast_util.py` source file
 
