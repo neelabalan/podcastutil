@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
+<opml version="1.0">
+  <head>
+    <title>Pocket Casts Feeds</title>
+  </head>
+  <body>
+    <outline text="feeds">
+      <outline type="rss" text="Triangulation (MP3)" xmlUrl="https://feeds.twit.tv/tri.xml" />
+      <outline type="rss" text="Science Vs" xmlUrl="https://feeds.megaphone.fm/sciencevs" />
+    </outline>
+  </body>
+</opml>
