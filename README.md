@@ -1,5 +1,5 @@
 # Podcast Util :headphones:
-
+[![Build Status - Github](https://github.com/neelabalan/podcastutil/workflows/pytesting/badge.svg)](https://github.com/neelabalan/podcastutil/actions?query=workflow%3Apytesting)
 > A minimal Podcast feed parsing utility in python
 
 
