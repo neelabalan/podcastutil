@@ -27,11 +27,25 @@ class PodcastUtil( object ):
         feeds = list()
         for url in urls:
             feed = feedparser.parse( url )
-            if feed.status == 200:
-                feeds.append( feedparser.parse( url ))
-                logging.info( 'url parsed - {}'.format( url ) )
+            if 'status' in feed:
+                match feed.status:
+                    case 200 | 302:
+                        feeds.append( feed )
+                        logging.info( 'url parsed - {}'.format( url ) )
+                    case 301:
+                        feeds.append( feed )
+                        logging.warning( 'Feed moved permanently! Please replace {} with {} in your opml config file!'.format( url, feed["href"]))
+                        logging.info( 'url parsed - {}'.format( url ) )
+                    case 403:
+                        logging.warning( 'got 403 Forbidden when accessing {}'.format( url ))
+                    case 404:
+                        logging.warning( 'feed not found, maybe dead {}'.format( url ))
+                    case 410:
+                        logging.warning( 'feed deleted! please remove from your opml config file! {}'.format( url ))
+                    case _:
+                        logging.warning( 'status - {} while parsing url {}'.format( feed.status, url ))
             else:
-                logging.info( 'status - {} while parsing url {}'.format( feed.status, url ))
+                logging.warning('Bad URL, check feed for {}'.format(url))
         return feeds
         # return [ feedparser.parse( url ) for url in urls ] 
 
@@ -48,8 +62,8 @@ class PodcastUtil( object ):
                                             else feed.get( 'feed' ).get( 'updated' ),
                 etag         = feed.etag if hasattr( feed, 'etag' ) else None,
                 rsslink      = feed.href,
-                link         = feed.feed.link,
-                subtitle     = feed.feed.get( 'subtitle' ), 
+                link         = feed.feed.link if hasattr( feed, 'link' ) else None,
+                subtitle     = feed.feed.get( 'subtitle' ) if hasattr( feed, 'subtitle' ) else None, 
                 episodes     = self._construct_episodes_message( feed )
             ) 
 
