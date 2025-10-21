@@ -1,0 +1,13 @@
+fix = true
+line-length = 121
+
+[lint]
+select = ["F", "W", "I001"]
+fixable = ["I001", "F401"]
+
+[format]
+# Prefer single quotes over double quotes.
+quote-style = "single"
+
+[lint.isort]
+force-single-line = true
